@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speedDown;
+    [SerializeField] private float _speedHorizontal;
 
     private Rigidbody _rigidbody;
 
@@ -17,9 +18,12 @@ public class PlayerMover : MonoBehaviour
     private void Update()
     {
         _rigidbody.velocity = Vector2.zero;
-        if (Input.GetKey(KeyCode.LeftArrow)) _rigidbody.velocity += Vector3.left * _speed;
-        if (Input.GetKey(KeyCode.RightArrow)) _rigidbody.velocity += Vector3.right * _speed;
-        if (Input.GetKey(KeyCode.UpArrow)) _rigidbody.velocity += Vector3.forward * _speed;
-        if (Input.GetKey(KeyCode.DownArrow)) _rigidbody.velocity += Vector3.back * _speed;
+        _rigidbody.velocity += Vector3.back * _speedDown;
+
+        if (Input.GetKey(KeyCode.LeftArrow)) 
+            _rigidbody.velocity += Vector3.left * _speedHorizontal;
+
+        if (Input.GetKey(KeyCode.RightArrow)) 
+            _rigidbody.velocity += Vector3.right * _speedHorizontal;
     }
 }
