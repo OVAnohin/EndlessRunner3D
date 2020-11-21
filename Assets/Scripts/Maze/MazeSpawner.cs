@@ -6,6 +6,7 @@ public class MazeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _cellPrefab;
     [SerializeField] private Transform[] _chunks;
+    [SerializeField] private Vector3 _cellSize = new Vector3(1, 1, 0);
 
     private float _firstPointX = -3;
     private float _firstPointY = -25;
@@ -40,7 +41,7 @@ public class MazeSpawner : MonoBehaviour
                     Cell cell = spawned.GetComponent<Cell>();
                     cell.WallLeft.SetActive(maze[i, j].WallLeft);
                     cell.WallBottom.SetActive(maze[i, j].WallBottom);
-                    spawned.transform.position = new Vector3(x, y, chunk.position.z);
+                    spawned.transform.position = new Vector3(x * _cellSize.x, y * _cellSize.y, y * _cellSize.z);
                     x += 1;
                 }
                 y += 1;
