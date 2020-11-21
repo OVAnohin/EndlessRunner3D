@@ -51,10 +51,12 @@ public class MazeGenerator
 
         for (int y = 0; y < Maze.GetLength(1); y++)
             Maze[_width - 1, y].WallBottom = false;
+    
 
         for (int x = 0; x < Maze.GetLength(0); x++)
         {
             Maze[x, _height - 1].WallLeft = false;
+            Maze[x, _height - 1].WallBottom = false;
             Maze[x, 0].WallBottom = false;
         }
     }
