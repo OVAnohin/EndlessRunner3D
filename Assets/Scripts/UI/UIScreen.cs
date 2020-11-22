@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Screen : MonoBehaviour
+public abstract class UIScreen : MonoBehaviour
 {
     [SerializeField] protected Button PlayButton;
     [SerializeField] protected Button OptionButton;

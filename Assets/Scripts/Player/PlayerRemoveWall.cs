@@ -9,9 +9,9 @@ public class PlayerRemoveWall : MonoBehaviour
 
     private bool _isCoolDown = false;
 
-    private void Update()
+    public void TryRemoveWall()
     {
-        if (Input.GetKey(KeyCode.Space) && _isCoolDown == false)
+        if ( _isCoolDown == false)
         {
             StartCoroutine(SetWallCheckerOn());
             StartCoroutine(RemoveWall());

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameOverScreen : Screen
+public class GameOverScreen : UIScreen
 {
     public event UnityAction ReStartButtonButtonClick;
     public event UnityAction ExitMainMenuButtonButtonClick;
