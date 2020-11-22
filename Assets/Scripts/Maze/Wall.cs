@@ -6,7 +6,7 @@ public class Wall : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<WallChecker>() != null)
+        if (other.GetComponent<PlayerWallChecker>() != null)
             gameObject.SetActive(false);
     }
 }

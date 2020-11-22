@@ -13,8 +13,6 @@ public class Game : MonoBehaviour
     [SerializeField] private MazeSpawner _mazeSpawner;
     [SerializeField] private Transform _camera;
 
-    public event UnityAction ReStartGame;
-
     private StartScreen _startScreen;
     private GameOverScreen _gameOverScreen;
     private Vector3 _startCameraPosition;
@@ -29,12 +27,14 @@ public class Game : MonoBehaviour
     {
         _startScreen.PlayButtonClick += OnPlayButtonClick;
         _gameOverScreen.ReStartButtonButtonClick += OnReStartButtonButtonClick;
+        _gameOverScreen.ExitMainMenuButtonButtonClick += OnExitMainMenuButtonButtonClick;
     }
 
     private void OnDisable()
     {
         _startScreen.PlayButtonClick -= OnPlayButtonClick;
         _gameOverScreen.ReStartButtonButtonClick -= OnReStartButtonButtonClick;
+        _gameOverScreen.ExitMainMenuButtonButtonClick -= OnExitMainMenuButtonButtonClick;
     }
 
     private void Start()
@@ -64,9 +64,15 @@ public class Game : MonoBehaviour
         StartGame();
     }
 
+    private void OnExitMainMenuButtonButtonClick()
+    {
+        _gameOver.SetActive(false);
+        ReInitializeGame();
+        _start.SetActive(true);
+    }
+
     private void ReInitializeGame()
     {
-        ReStartGame?.Invoke();
         _camera.position = _startCameraPosition;
         _mazeSpawner.ResetSpawner();
         _player.ResetPlayer();
