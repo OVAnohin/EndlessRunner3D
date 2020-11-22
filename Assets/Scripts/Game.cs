@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class Game : MonoBehaviour
 {
@@ -12,10 +13,13 @@ public class Game : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private MazeSpawner _mazeSpawner;
     [SerializeField] private Transform _camera;
+    [SerializeField] private TMP_Text _score;
 
     private StartScreen _startScreen;
     private GameOverScreen _gameOverScreen;
     private Vector3 _startCameraPosition;
+    private DateTime _scoreTime;
+    private bool _isGamePlaying;
 
     private void Awake()
     {
@@ -26,6 +30,7 @@ public class Game : MonoBehaviour
     private void OnEnable()
     {
         _startScreen.PlayButtonClick += OnPlayButtonClick;
+        _startScreen.ExitButtonClick += OnExitButtonClick;
         _gameOverScreen.ReStartButtonButtonClick += OnReStartButtonButtonClick;
         _gameOverScreen.ExitMainMenuButtonButtonClick += OnExitMainMenuButtonButtonClick;
     }
@@ -33,6 +38,7 @@ public class Game : MonoBehaviour
     private void OnDisable()
     {
         _startScreen.PlayButtonClick -= OnPlayButtonClick;
+        _startScreen.ExitButtonClick -= OnExitButtonClick;
         _gameOverScreen.ReStartButtonButtonClick -= OnReStartButtonButtonClick;
         _gameOverScreen.ExitMainMenuButtonButtonClick -= OnExitMainMenuButtonButtonClick;
     }
@@ -79,13 +85,27 @@ public class Game : MonoBehaviour
     }
 
     private void StartGame()
-    {      
+    {
+        _isGamePlaying = true;
+        _scoreTime = DateTime.Now;
         Time.timeScale = 1;
     }
 
     private void StopGame()
     {
+        if (_isGamePlaying)
+        {
+            TimeSpan deltaTime = (DateTime.Now - _scoreTime).Duration();
+            _score.text= deltaTime.Hours.ToString() + ":"+ deltaTime.Minutes.ToString() + ":" + deltaTime.Seconds.ToString();
+        }
+
+        _isGamePlaying = false;
         Time.timeScale = 0;
         _gameOver.SetActive(true);
+    }
+
+    private void OnExitButtonClick()
+    {
+        Application.Quit();
     }
 }

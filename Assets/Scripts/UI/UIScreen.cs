@@ -8,13 +8,13 @@ public abstract class UIScreen : MonoBehaviour
     [SerializeField] protected Button PlayButton;
     [SerializeField] protected Button OptionButton;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         PlayButton.onClick.AddListener(OnPlayButtonClick);
         OptionButton.onClick.AddListener(OnOptionButtonClick);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         PlayButton.onClick.RemoveListener(OnPlayButtonClick);
         OptionButton.onClick.RemoveListener(OnOptionButtonClick);
