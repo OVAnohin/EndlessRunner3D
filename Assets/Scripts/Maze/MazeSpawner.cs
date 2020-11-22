@@ -40,6 +40,16 @@ public class MazeSpawner : MonoBehaviour
         }
     }
 
+    public void ResetSpawner()
+    {
+        _firstPointX = -3;
+        _firstPointZ = -25;
+        _currentChunk = 0;
+
+        for (int c = 0; c < _chunks.Length; c++)
+            RespawnChunk();
+    }
+
     private void SpawnCell(Transform chunk, MazeGeneratorCell[,] maze)
     {
         float z = _firstPointZ;

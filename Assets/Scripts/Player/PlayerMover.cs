@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,17 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _speedHorizontal;
 
     private Rigidbody _rigidbody;
+    private Vector3 _startPosition;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _startPosition = transform.position;
+    }
+
+    public void Restart()
+    {
+        transform.position = _startPosition;
     }
 
     private void Update()
